@@ -1,0 +1,76 @@
+[
+    {
+        "id": 1,
+        "nickname": "Gizem",
+        "adviceKind": "Gerilim",
+        "description": "Hadi bi gerilim öner !ssssssssssssssssssdasde23423424234234234234234234234234234234",
+        "avatarUrl": "assets/avatars/avatar1.png",
+        "publishedDate":"15 dk",
+        "chats": [
+            {
+                "idUser": 5,
+                "nickname": "Güliz",
+                "adviceKind": "Gerilim",
+                "description": "Ben bayıldım.Kesinlikle tavsiye ediyorum.",
+                "avatarUrl": "assets/avatars/avatar3.png",
+                "publishedDate":"15 dk",
+                "likeCount": 15,
+                "movieName": "The Voices",
+                "movieTime":"160 dk",
+                "movieYear":"2004",
+                "isChatOwner": false
+            },
+            {
+                "idUser": 1,
+                "nickname": "Gizem",
+                "adviceKind": "Gerilim",
+                "description": "Bu filmi izlemişitim :(  Ama kesinlikle haklısın mükemmel bir filmdi",
+                "avatarUrl": "assets/avatars/avatar1.png",
+                "publishedDate":"15 dk",
+                "likeCount": 15,
+                "movieName": "The Voices",
+                "movieTime":"",
+                "movieYear":"",
+                "isChatOwner": true
+            },
+            {
+                "idUser": 5,
+                "nickname": "Güliz",
+                "adviceKind": "Gerilim",
+                "description": "Ben bayıldım.Kesinlikle tavsiye ediyorum.",
+                "avatarUrl": "assets/avatars/avatar5.png",
+                "publishedDate":"15 dk",
+                "likeCount": 15,
+                "movieName": "The Voices",
+                "movieTime":"160 dk",
+                "movieYear":"2004",
+                "isChatOwner": false
+            }
+        ]
+
+    },
+    {
+        "id": 2,
+        "nickname": "Güliz",
+        "adviceKind": "Korku",
+        "description": "Kolay kolay korkmam ona göre :D ",
+        "avatarUrl": "assets/avatars/avatar3.png",
+        "publishedDate":"1 h",
+        "chats": [
+            {
+            "idUser": 1,
+            "nickname": "Gizem",
+            "adviceKind": "Gerilim",
+            "description": "aasdasdasds",
+            "avatarUrl": "assets/avatars/avatar1.png",
+            "publishedDate":"15 dk",
+            "likeCount": 15,
+            "movieName": "The Voices",
+            "movieTime":"140 dk",
+            "movieYear":"",
+            "isChatOwner": false
+        }
+    ]
+
+    }
+]

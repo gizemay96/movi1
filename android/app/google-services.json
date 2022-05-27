@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "622594673667",
+    "project_id": "moviv1",
+    "storage_bucket": "moviv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622594673667:android:39d92ccf499027eebad236",
+        "android_client_info": {
+          "package_name": "com.example.movi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622594673667-8cbh3bs0nlumf4hb5ub477n4g8jf32ds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.movi",
+            "certificate_hash": "185f3863ef72d95953fb4cdd1e65a31408b655a6"
+          }
+        },
+        {
+          "client_id": "622594673667-nq40djq7sd5eh2npg0jpl0l38g21ebte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBukK_e3VaTvGLPg8PpaFhYxcVOxuRirYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622594673667-nq40djq7sd5eh2npg0jpl0l38g21ebte.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622594673667-e3o1tme14q7sng4v27m5ic1bguudp39l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.movi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
