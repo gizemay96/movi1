@@ -45,7 +45,7 @@ class RouteGenerator {
         return _createRoute(const LoginWithPhoneScreen(), settings);
 
       case '/create-profile':
-        var userHeaderInfo = settings.arguments as UserShortInfo;
+        var userHeaderInfo = settings.arguments;
         return _createRoute(
             CreateProfileScreen(userHeaderInfo: userHeaderInfo), settings);
 
