@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
+import 'dart:async';
 
+import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movi/components/buttons.dart';
@@ -22,16 +23,22 @@ class CreateSuggestionScreen extends StatefulWidget {
 
 class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
   late String searchValue = '';
+  Timer? _debounce;
 
   Future<List<Movie>> _getMovies() async {
+    return await this.getResponse();
+  }
+
+  getResponse() async {
     try {
-      var url = searchValue.length > 2
+      var url = searchValue.length > 3
           ? 'https://api.themoviedb.org/3/search/movie?api_key=06397476a482aded09cb86da0a2cbbbb&query=${searchValue}&language=tr-TR'
           : 'https://api.themoviedb.org/3/movie/popular?api_key=06397476a482aded09cb86da0a2cbbbb&language=tr-TR&page=1';
       var response = await Dio().get('${url}');
       List<Movie> _movieList = [];
       if (response.statusCode == 200) {
         var responseData = response.data;
+        print(responseData);
 
         _movieList = (responseData['results'] as List)
             .map((e) => Movie.fromMap(e))
@@ -125,6 +132,10 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                           return ListView.builder(
                               itemCount: movieList.length,
                               itemBuilder: (context, ind) {
+                                var movieImgPath = movieList[ind].posterPath !=
+                                        null
+                                    ? 'https://image.tmdb.org/t/p/w94_and_h141_bestv2${movieList[ind].posterPath}'
+                                    : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg';
                                 return Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 15, 0, 15),
@@ -136,12 +147,53 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
                                             child: Image.network(
-                                                'https://image.tmdb.org/t/p/w94_and_h141_bestv2${movieList[ind].posterPath}'),
+                                              movieImgPath,
+                                              width: 110,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                          Text(
-                                            movieList[ind].title,
-                                            style: kTextStyle,
+                                          const SizedBox(
+                                            width: 30,
                                           ),
+                                          Flexible(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  movieList[ind].originalTitle,
+                                                  style: kTextStyle,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  formatDate(
+                                                      movieList[ind]
+                                                          .releaseDate,
+                                                      [
+                                                        dd,
+                                                        ' ',
+                                                        M,
+                                                        ' ',
+                                                        yyyy
+                                                      ]).toString(),
+                                                  style: kTextStyle,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  movieList[ind]
+                                                      .voteAverage
+                                                      .toString(),
+                                                  style: kTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
                                     ),
