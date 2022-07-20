@@ -8,6 +8,7 @@ import 'package:movi/models/user_model.dart';
 import 'package:movi/screens/advice_chat_screen.dart';
 import 'package:movi/screens/create_profile_screen.dart';
 import 'package:movi/screens/create_suggestion.dart';
+import 'package:movi/screens/create_suggestion_room.dart';
 import 'package:movi/screens/home_screen.dart';
 import 'package:movi/screens/login_screen.dart';
 import 'package:movi/screens/login_with_phone.dart';
@@ -64,6 +65,9 @@ class RouteGenerator {
               selectedChatScreenForSuggestion: selectedChatScreenForSuggestion,
             ),
             settings);
+
+      case '/create-suggets-room':
+        return _createRoute(CreateSuggestionRoom(), settings);
 
       default:
         return MaterialPageRoute(

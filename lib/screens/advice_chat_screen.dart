@@ -113,59 +113,78 @@ class SuggestedMessage extends StatelessWidget {
             height: 25,
           ),
           Container(
-            width: 300,
-            decoration: BoxDecoration(
-                color: kPrimaryColor, borderRadius: BorderRadius.circular(15)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 1, 5, 10),
-              child: Column(children: [
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  Text(
-                    chatItem.nickname,
-                    style: kTextStyleMd,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                            child: Image.asset(
+                          'assets/movie_icon1.png',
+                          fit: BoxFit.cover,
+                          height: 95,
+                          width: 65,
+                        )),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Column(children: [
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '"' + chatItem.movieName + '"',
+                                  style: kTextStyleMd,
+                                  maxLines: 1,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Image.asset(
+                                  chatItem.avatarUrl,
+                                  width: 50,
+                                ),
+                                Text(
+                                  chatItem.nickname + ' ' + 'Önerdi',
+                                  style: kTextStyle.copyWith(fontSize: 13),
+                                ),
+                              ]),
+                        ]),
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    width: 10,
+                    height: 20,
                   ),
-                  Image.asset(
-                    chatItem.avatarUrl,
-                    width: 20,
-                  )
-                ]),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                          child: Image.asset('assets/movie_icon.png')),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              chatItem.movieName,
-                              style: kTextStyleMd,
-                              maxLines: 1,
-                            ),
-                          ),
-                          Text(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.height - 550,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey),
+                        child: Center(
+                          child: Text(
                             chatItem.description,
                             style: kTextStyle,
                             maxLines: 3,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ]),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Container(
@@ -224,41 +243,47 @@ class OwnerMessage extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: Column(
         children: [
-          Container(
-            constraints: const BoxConstraints(minWidth: 100, maxWidth: 280),
-            padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(15)),
-            child: Column(
+          Align(
+            alignment: Alignment.topLeft,
+            child: Row(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        chatItem.avatarUrl,
-                        width: 20,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        chatItem.nickname,
-                        style: kTextStyleMd,
-                        maxLines: 1,
-                      ),
-                    ],
-                  ),
+                Image.asset(
+                  chatItem.avatarUrl,
+                  width: 20,
                 ),
                 const SizedBox(
-                  height: 5,
+                  width: 10,
                 ),
                 Text(
-                  chatItem.description,
-                  style: kTextStyle.copyWith(fontSize: 13),
-                  maxLines: 8,
+                  chatItem.nickname,
+                  style: kTextStyleMd,
+                  maxLines: 1,
                 ),
               ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              constraints: const BoxConstraints(
+                  minWidth: 100, maxWidth: 280, minHeight: 70),
+              padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+              decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15))),
+              child: Center(
+                child: Text(
+                  chatItem.description,
+                  style: kTextStyle,
+                  maxLines: 8,
+                ),
+              ),
             ),
           ),
         ],

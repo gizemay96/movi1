@@ -110,7 +110,10 @@ class _CreateProfileScreenState extends ConsumerState<CreateProfileScreen> {
                   ),
                   GlassNumberSelect(
                       currentValue: _userAge,
-                      callback: (val) => setState(() => _userAge = val)),
+                      callback: (val) => setState(() => _userAge = val),
+                      minVal: 15,
+                      stepCount: 1,
+                      maxVal: 90),
                 ],
               ),
             ),

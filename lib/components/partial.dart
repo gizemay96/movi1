@@ -69,9 +69,17 @@ class _CustomScaffoldState extends State<CustomScaffold> {
 class GlassNumberSelect extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final currentValue;
+  final minVal;
+  final maxVal;
+  final stepCount;
   final Function callback;
   const GlassNumberSelect(
-      {required this.currentValue, required this.callback, Key? key})
+      {required this.currentValue,
+      required this.callback,
+      required this.minVal,
+      required this.maxVal,
+      required this.stepCount,
+      Key? key})
       : super(key: key);
 
   @override
@@ -94,12 +102,12 @@ class _GlassNumberSelectState extends State<GlassNumberSelect> {
       border: 0,
       child: NumberPicker(
         axis: Axis.horizontal,
-        step: 1,
+        step: widget.stepCount,
         itemCount: 7,
         itemWidth: 44,
         value: widget.currentValue,
-        minValue: 15,
-        maxValue: 80,
+        minValue: widget.minVal,
+        maxValue: widget.maxVal,
         textStyle: kTextStyle,
         selectedTextStyle: TextStyle(
           color: selectedItemBgColor,
