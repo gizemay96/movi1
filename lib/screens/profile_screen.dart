@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 import 'package:movi/store/user_manager.dart';
 
 class ProfileScreen extends StatefulWidget {

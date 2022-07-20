@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:movi/components/buttons.dart';
 import 'package:movi/components/partial.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 import 'package:movi/data/avatar_list.dart';
 import 'package:movi/models/user_model.dart';
 import 'package:movi/store/user_manager.dart';
@@ -191,7 +191,7 @@ class _CreateProfileScreenState extends ConsumerState<CreateProfileScreen> {
       'score': '0'
     };
     await db.doc('users/${widget.userHeaderInfo.uid}').set(newUser);
-    ref.read(userNotifierProvider.notifier).setUser(User(
+    ref.read(userNotifierProvider.notifier).setUser(UserCust(
         userId: newUser['userId'],
         nickname: newUser['nickname'],
         avatarUrl: newUser['avatarUrl'],

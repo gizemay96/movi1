@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movi/route_generator.dart';
-import 'package:movi/theme.dart';
+import 'package:movi/models/user_model.dart';
+import 'package:movi/store/user_manager.dart';
+import 'package:movi/utils/route_generator.dart';
+import 'package:movi/utils/theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'utils/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +53,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class NewWidget extends StatelessWidget {
+class NewWidget extends ConsumerWidget {
   final auth;
   const NewWidget({
     required this.auth,
@@ -59,15 +61,28 @@ class NewWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     auth.authStateChanges().listen((User? user) async {
       if (user == null) {
         Navigator.pushNamed(context, '/login-screen');
       } else {
-        var response = await db.doc('users/${user.uid}').get();
+        // var response = await db.doc('users/${user.uid}').get();
+        final response = await db.collection('users').doc(user.uid).get();
         var userHasDb = response.exists;
+        final userInfo = response.data();
 
+        debugPrint('-------------' + userInfo.toString());
         if (userHasDb) {
+          ref.read(userNotifierProvider.notifier).setUser(UserCust(
+              userId: userInfo!['userId'],
+              nickname: userInfo['nickname'],
+              avatarUrl: userInfo['avatarUrl'],
+              age: userInfo['age'],
+              email: userInfo['email'],
+              mtSuggestion: userInfo['mtSuggestion'],
+              mtSuggestionRoom: userInfo['mtSuggestionRoom'],
+              score: userInfo['score']));
+
           Navigator.pushNamed(context, '/main-app-screen');
         } else {
           Navigator.pushNamed(context, '/create-profile', arguments: user);

@@ -1,4 +1,4 @@
-class User {
+class UserCust {
   final String userId;
   final String nickname;
   final String avatarUrl;
@@ -7,7 +7,7 @@ class User {
   final String mtSuggestion;
   final String mtSuggestionRoom;
   final String score;
-  User({
+  UserCust({
     required this.userId,
     required this.nickname,
     required this.avatarUrl,

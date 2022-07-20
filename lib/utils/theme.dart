@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 
 // This is our  main focus
 // Let's apply light and dark theme on our app

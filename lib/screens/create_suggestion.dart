@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movi/components/buttons.dart';
 import 'package:movi/components/partial.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 import 'package:movi/models/advice_model.dart';
 import 'package:movi/models/movie_model.dart';
 

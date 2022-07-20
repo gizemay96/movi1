@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:movi/components/buttons.dart';
 import 'package:movi/components/partial.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 import 'package:movi/models/advice_model.dart';
 
 class AdviceChatScreen extends StatefulWidget {

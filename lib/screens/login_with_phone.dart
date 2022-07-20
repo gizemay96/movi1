@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movi/components/buttons.dart';
 import 'package:movi/components/partial.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 import 'package:movi/screens/create_profile_screen.dart';
 
 class LoginWithPhoneScreen extends StatefulWidget {

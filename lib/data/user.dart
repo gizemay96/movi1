@@ -6,5 +6,5 @@ class Users {
   }
   static const String APP_NAME = "Movie Hunter";
 
-  static const List<User> USER_LIST = [];
+  static const List<UserCust> USER_LIST = [];
 }

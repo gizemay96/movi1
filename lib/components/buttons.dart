@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:movi/contants.dart';
+import 'package:movi/utils/contants.dart';
 
 class GlassButton extends StatelessWidget {
   final String buttonText;

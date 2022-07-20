@@ -1,16 +1,17 @@
 import 'package:movi/models/user_model.dart';
 import 'package:riverpod/riverpod.dart';
 
-final userNotifierProvider = StateNotifierProvider<UserManager, User>((ref) {
+final userNotifierProvider =
+    StateNotifierProvider<UserManager, UserCust>((ref) {
   return UserManager();
 });
 
 // ignore: empty_constructor_bodies
-class UserManager extends StateNotifier<User> {
+class UserManager extends StateNotifier<UserCust> {
   UserManager()
-      : super(User(
-            userId: '0',
-            nickname: 'dasdasd',
+      : super(UserCust(
+            userId: '',
+            nickname: '',
             avatarUrl: '',
             age: '',
             email: '',
@@ -18,8 +19,8 @@ class UserManager extends StateNotifier<User> {
             mtSuggestionRoom: '',
             score: ''));
 
-  void setUser(User userInfo) {
-    state = User(
+  void setUser(UserCust userInfo) {
+    state = UserCust(
         userId: userInfo.userId,
         nickname: userInfo.nickname,
         avatarUrl: userInfo.avatarUrl,
