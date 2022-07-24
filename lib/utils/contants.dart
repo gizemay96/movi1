@@ -12,7 +12,7 @@ const kDefaultPadding = 25.0;
 
 const kPrimaryButtonTextStyle = TextStyle(
   color: Color(0xffeaeaea),
-  fontSize: 22,
+  fontSize: 20,
   fontWeight: FontWeight.w900,
   overflow: TextOverflow.ellipsis,
 );

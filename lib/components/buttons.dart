@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:movi/utils/contants.dart';
@@ -87,7 +88,6 @@ class PrimaryIconButtonLg extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             primary: buttonBackground,
             onPrimary: Colors.white70,
-            textStyle: kPrimaryButtonTextStyle,
             minimumSize: const Size.fromHeight(1),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0))),
@@ -100,7 +100,7 @@ class PrimaryIconButtonLg extends StatelessWidget {
                   ? Image.asset(iconSrc)
                   : null,
             ),
-            Text(buttonText, style: kPrimaryButtonTextStyle),
+            AutoSizeText(buttonText, style: kPrimaryButtonTextStyle),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
               child: iconSrc.length > 1 && iconDirection == 'right'

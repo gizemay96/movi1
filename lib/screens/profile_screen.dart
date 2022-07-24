@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -85,9 +86,12 @@ class UserInfos extends ConsumerWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            user.email,
-            style: kTextStyleMd,
+          Flexible(
+            flex: 1,
+            child: AutoSizeText(
+              user.email,
+              style: kTextStyleMd,
+            ),
           ),
           const SizedBox(
             width: 10,
@@ -183,7 +187,7 @@ class ProfileInfoCard extends StatelessWidget {
             ),
             Container(
               height: 50,
-              width: MediaQuery.of(context).size.width - 250,
+              width: MediaQuery.of(context).size.width - 200,
               decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.circular(20)),
