@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -76,11 +77,11 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                       Icons.arrow_back_ios,
                       color: Colors.white,
                     )),
-                Text(
+                AutoSizeText(
                   'Haydi ' +
                       widget.selectedChatScreenForSuggestion.nickname +
                       ' için öneri yap',
-                  style: kTextStyleMd.copyWith(fontSize: 25),
+                  style: kTextStyleMd,
                 )
               ],
             ),
@@ -91,7 +92,7 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
               color: const Color(0xff1A1A1A),
             ),
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 190,
+            height: MediaQuery.of(context).size.height - 200,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Column(
@@ -124,23 +125,26 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                         });
                       }),
                   Flexible(
+                    flex: 1,
                     child: FutureBuilder<List<Movie>>(
                       future: _getMovies(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
                           List<Movie> movieList = snapshot.data!;
-                          return ListView.builder(
-                              itemCount: movieList.length,
-                              itemBuilder: (context, ind) {
-                                var movieImgPath = movieList[ind].posterPath !=
-                                        null
-                                    ? 'https://image.tmdb.org/t/p/w94_and_h141_bestv2${movieList[ind].posterPath}'
-                                    : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg';
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                  child: InkWell(
-                                    child: Container(
+                          return ClipRRect(
+                            borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(50)),
+                            child: ListView.builder(
+                                itemCount: movieList.length,
+                                itemBuilder: (context, ind) {
+                                  // ignore: unnecessary_null_comparison
+                                  var movieImgPath = movieList[ind].posterPath !=
+                                          null
+                                      ? 'https://image.tmdb.org/t/p/w94_and_h141_bestv2${movieList[ind].posterPath}'
+                                      : 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg';
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                    child: InkWell(
                                       child: Row(
                                         children: [
                                           ClipRRect(
@@ -162,14 +166,14 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                   movieList[ind].originalTitle,
                                                   style: kTextStyle,
                                                 ),
                                                 const SizedBox(
                                                   height: 10,
                                                 ),
-                                                Text(
+                                                AutoSizeText(
                                                   formatDate(
                                                       movieList[ind]
                                                           .releaseDate,
@@ -185,7 +189,7 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                                                 const SizedBox(
                                                   height: 10,
                                                 ),
-                                                Text(
+                                                AutoSizeText(
                                                   movieList[ind]
                                                       .voteAverage
                                                       .toString(),
@@ -196,14 +200,14 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
                                           )
                                         ],
                                       ),
+                                      onTap: () {},
                                     ),
-                                    onTap: () {},
-                                  ),
-                                );
-                              });
+                                  );
+                                }),
+                          );
                         } else if (snapshot.hasError) {
                           return Center(
-                            child: Text(
+                            child: AutoSizeText(
                               snapshot.error.toString(),
                               style: kTextStyle,
                             ),
@@ -221,7 +225,7 @@ class _CreateSuggestionScreenState extends State<CreateSuggestionScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(17.0),
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
             child: PrimaryIconButtonLg(
               iconSrc: 'assets/right_arrow.png',
               buttonText: 'Gönder',

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:movi/utils/contants.dart';
@@ -70,7 +71,7 @@ class AdviceCard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          AutoSizeText(
                             advice.nickname.toString(),
                             style: kTextStyle,
                           ),
@@ -79,7 +80,7 @@ class AdviceCard extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: kPrimaryColor,
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Text(
+                            child: AutoSizeText(
                               advice.adviceKind.toString(),
                               style: kTextStyle,
                               maxLines: 1,
@@ -92,7 +93,7 @@ class AdviceCard extends StatelessWidget {
                         height: 5,
                       ),
                       const Spacer(),
-                      Text(
+                      AutoSizeText(
                         advice.description.toString(),
                         style: kTextStyle.copyWith(fontSize: 13),
                         maxLines: 3,
@@ -102,7 +103,7 @@ class AdviceCard extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Text(
+                        child: AutoSizeText(
                           advice.publishedDate + ' ago',
                           style: kTextStyle.copyWith(fontSize: 12),
                         ),

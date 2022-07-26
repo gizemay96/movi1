@@ -86,11 +86,12 @@ class UserInfos extends ConsumerWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Flexible(
-            flex: 1,
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 100,
             child: AutoSizeText(
               user.email,
               style: kTextStyleMd,
+              maxLines: 1,
             ),
           ),
           const SizedBox(
@@ -192,7 +193,7 @@ class ProfileInfoCard extends StatelessWidget {
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.circular(20)),
               child: Center(
-                child: Text(
+                child: AutoSizeText(
                   title.toString(),
                   style: kTextStyleMd,
                 ),

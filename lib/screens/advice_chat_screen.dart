@@ -24,7 +24,7 @@ class _AdviceChatScreenState extends State<AdviceChatScreen> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -49,7 +49,7 @@ class _AdviceChatScreenState extends State<AdviceChatScreen> {
               color: const Color(0xff1A1A1A),
             ),
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 190,
+            height: MediaQuery.of(context).size.height - 200,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ListView.builder(
@@ -61,8 +61,9 @@ class _AdviceChatScreenState extends State<AdviceChatScreen> {
                   }),
             ),
           ),
+          Spacer(),
           Padding(
-            padding: const EdgeInsets.all(17.0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: PrimaryIconButtonLg(
               iconSrc: 'assets/advice_icon.png',
               buttonText: 'Film Öner',
@@ -168,16 +169,19 @@ class SuggestedMessage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.height - 550,
-                        height: 40,
+                        width: MediaQuery.of(context).size.height - 480,
+                        constraints: const BoxConstraints( maxHeight: 50, minHeight: 40),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.grey),
-                        child: Center(
-                          child: Text(
-                            chatItem.description,
-                            style: kTextStyle,
-                            maxLines: 3,
+                        child:  Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              chatItem.description,
+                              style: kTextStyle,
+                              maxLines: 3,
+                            ),
                           ),
                         ),
                       )
