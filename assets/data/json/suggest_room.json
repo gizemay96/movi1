@@ -1,0 +1,40 @@
+[
+    {
+        "roomId": "",
+        "description": "",
+        "publishedDate": "",
+        "userInfo": {   
+            "userId": "",
+            "nickname": "",
+            "avatarUrl": ""
+        },
+        "seggestionKinds": [
+            {
+                "id": 1,
+                "name": "Korku",
+                "icon": "fear"
+            }
+        ],
+        "chats": [
+            {
+                "userId": "",
+                "nickname": "",
+                "avatarUrl": "",
+                "description": "",
+                "isChatOwner": false,
+                "likeCount": 2,
+                "movieName": "",
+                "movieYear": "",
+                "movieTime": "",
+                "publishedDate": "",
+                "seggestionKinds": [
+                    {
+                        "id": 1,
+                        "name": "Korku",
+                        "icon": "fear"
+                    }
+                ]
+            }
+        ]
+    }
+]

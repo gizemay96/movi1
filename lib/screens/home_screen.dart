@@ -1,23 +1,22 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:movi/components/advice_card.dart';
+import 'package:movi/models/suggestionRoom_model.dart';
+import 'package:movi/services/api_service.dart';
 import 'package:movi/utils/contants.dart';
-import 'package:movi/models/advice_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final Future<List<Advice>> _getAdviceList;
-
+  late final Future<List<SuggestionRoom>> sugData;
   @override
   void initState() {
     super.initState();
-    _getAdviceList = getData();
+    sugData = ApiService().getSuggestionRooms();
   }
 
   @override
@@ -46,15 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Container(
             height: 1,
             width: 115,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: const BoxDecoration(color: Colors.white),
           ),
         ),
         const SizedBox(
           height: 20,
         ),
         Flexible(
-          child: FutureBuilder<List<Advice>>(
-            future: _getAdviceList,
+          child: FutureBuilder<List<SuggestionRoom>>(
+            future: sugData,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 var adviceList = snapshot.data!;
@@ -91,19 +90,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
-  }
-
-  Future<List<Advice>> getData() async {
-    try {
-      String okunanStr = await DefaultAssetBundle.of(context)
-          .loadString('assets/data/json/advice_list.json');
-      var jsonObject = jsonDecode(okunanStr);
-      List<Advice> adviceList =
-          (jsonObject as List).map((advice) => Advice.fromMap(advice)).toList();
-
-      return adviceList;
-    } catch (e) {
-      return Future.error(e.toString());
-    }
   }
 }

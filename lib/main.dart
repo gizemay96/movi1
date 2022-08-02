@@ -17,6 +17,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+    FlutterError.onError = (details) {
+    print(details.exception);  // the uncaught exception
+    print(details.stack) ; // the stack trace at the time
+  };
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -30,6 +34,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late FirebaseAuth auth;
+
 
   @override
   void initState() {
@@ -71,7 +76,7 @@ class NewWidget extends ConsumerWidget {
         var userHasDb = response.exists;
         final userInfo = response.data();
 
-        debugPrint('-------------' + userInfo.toString());
+        // debugPrint('-------------' + userInfo.toString());
         if (userHasDb) {
           ref.read(userNotifierProvider.notifier).setUser(UserCust(
               userId: userInfo!['userId'],

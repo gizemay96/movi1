@@ -1,13 +1,15 @@
+import 'dart:async';
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:movi/components/buttons.dart';
 import 'package:movi/components/partial.dart';
+import 'package:movi/models/suggestionRoom_model.dart';
 import 'package:movi/utils/contants.dart';
-import 'package:movi/models/advice_model.dart';
 
 class AdviceChatScreen extends StatefulWidget {
-  final Advice selectedAdvice;
-
+  final SuggestionRoom selectedAdvice;
   const AdviceChatScreen({required this.selectedAdvice, Key? key})
       : super(key: key);
 
@@ -16,7 +18,8 @@ class AdviceChatScreen extends StatefulWidget {
 }
 
 class _AdviceChatScreenState extends State<AdviceChatScreen> {
-  late List chatList = widget.selectedAdvice.chats;
+  late List<RoomChats> chatList = widget.selectedAdvice.chats;
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -37,33 +40,34 @@ class _AdviceChatScreenState extends State<AdviceChatScreen> {
                       color: Colors.white,
                     )),
                 Text(
-                  widget.selectedAdvice.nickname + ' Öneri Bekliyor',
+                  widget.selectedAdvice.userInfo.nickname + ' Öneri Bekliyor',
                   style: kTextStyleMd.copyWith(fontSize: 25),
                 )
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(60),
-              color: const Color(0xff1A1A1A),
-            ),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 200,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: ListView.builder(
-                  itemCount: chatList.length,
-                  itemBuilder: (context, ind) {
-                    return GetChatItem(
-                      chatItem: chatList[ind],
-                    );
-                  }),
+          Expanded(
+            flex: 90,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60),
+                color: const Color(0xff1A1A1A),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ListView.builder(
+                    itemCount: chatList.length,
+                    itemBuilder: (context, ind) {
+                      return GetChatItem(
+                        chatItem: chatList[ind],
+                      );
+                    }),
+              ),
             ),
           ),
-          Spacer(),
+
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
             child: PrimaryIconButtonLg(
               iconSrc: 'assets/advice_icon.png',
               buttonText: 'Film Öner',
@@ -86,7 +90,7 @@ class GetChatItem extends StatelessWidget {
     required this.chatItem,
   }) : super(key: key);
 
-  final Chat chatItem;
+  final RoomChats chatItem;
 
   @override
   Widget build(BuildContext context) {
@@ -96,13 +100,50 @@ class GetChatItem extends StatelessWidget {
   }
 }
 
-class SuggestedMessage extends StatelessWidget {
+class SuggestedMessage extends StatefulWidget {
   const SuggestedMessage({
     Key? key,
     required this.chatItem,
   }) : super(key: key);
 
-  final Chat chatItem;
+  final RoomChats chatItem;
+
+  @override
+  State<SuggestedMessage> createState() => _SuggestedMessageState();
+}
+
+class _SuggestedMessageState extends State<SuggestedMessage> {
+  late String durationP = "0";
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  // ignore: must_call_super
+  void initState() {
+    getPublishedTime();
+    Timer.periodic(const Duration(minutes: 1), (Timer t) => getPublishedTime());
+  }
+
+  void getPublishedTime() {
+    final duration =
+        DateTime.now().difference(widget.chatItem.publishedDate.toDate());
+    final minutes = duration.inMinutes.remainder(60);
+    final hours = duration.inHours;
+    late String value;
+    if (hours > 0) {
+      value = "${hours.toString()} sa önce";
+    } else {
+      value = "${minutes.toString()} dk önce";
+    }
+    setState(() {
+      durationP = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,37 +165,36 @@ class SuggestedMessage extends StatelessWidget {
                     children: [
                       Flexible(
                         flex: 1,
-                        child: Container(
-                            child: Image.asset(
+                        child: Image.asset(
                           'assets/movie_icon1.png',
                           fit: BoxFit.cover,
                           height: 95,
                           width: 65,
-                        )),
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
                       Flexible(
-                        flex: 1,
+                        flex: 2,
                         child: Column(children: [
                           Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  '"' + chatItem.movieName + '"',
+                                AutoSizeText(
+                                  '"' + widget.chatItem.movieName + '"',
                                   style: kTextStyleMd,
                                   maxLines: 1,
                                 ),
                                 const SizedBox(
-                                  width: 10,
+                                  height: 10,
                                 ),
                                 Image.asset(
-                                  chatItem.avatarUrl,
+                                  widget.chatItem.avatarUrl,
                                   width: 50,
                                 ),
                                 Text(
-                                  chatItem.nickname + ' ' + 'Önerdi',
+                                  widget.chatItem.nickname + ' ' + 'Önerdi',
                                   style: kTextStyle.copyWith(fontSize: 13),
                                 ),
                               ]),
@@ -170,15 +210,16 @@ class SuggestedMessage extends StatelessWidget {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.height - 480,
-                        constraints: const BoxConstraints( maxHeight: 50, minHeight: 40),
+                        constraints:
+                            const BoxConstraints(maxHeight: 50, minHeight: 40),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.grey),
-                        child:  Padding(
-                          padding: EdgeInsets.all(8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: Text(
-                              chatItem.description,
+                              widget.chatItem.description,
                               style: kTextStyle,
                               maxLines: 3,
                             ),
@@ -191,7 +232,7 @@ class SuggestedMessage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: 300,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,16 +249,16 @@ class SuggestedMessage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 7),
                       child: Text(
-                        chatItem.likeCount.toString(),
+                        widget.chatItem.likeCount.toString(),
                         style: kTextStyleMd,
                       ),
                     )
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: EdgeInsets.only(top: 15),
                   child: Text(
-                    chatItem.publishedDate + '  önce',
+                    durationP.toString(),
                     style: kTextStyle,
                   ),
                 )
@@ -233,13 +274,50 @@ class SuggestedMessage extends StatelessWidget {
   }
 }
 
-class OwnerMessage extends StatelessWidget {
+class OwnerMessage extends StatefulWidget {
   const OwnerMessage({
     Key? key,
     required this.chatItem,
   }) : super(key: key);
 
-  final Chat chatItem;
+  final RoomChats chatItem;
+
+  @override
+  State<OwnerMessage> createState() => _OwnerMessageState();
+}
+
+class _OwnerMessageState extends State<OwnerMessage> {
+  late String durationP = "0";
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  // ignore: must_call_super
+  void initState() {
+    getPublishedTime();
+    Timer.periodic(const Duration(minutes: 1), (Timer t) => getPublishedTime());
+  }
+
+  void getPublishedTime() {
+    final duration =
+        DateTime.now().difference(widget.chatItem.publishedDate.toDate());
+    final minutes = duration.inMinutes.remainder(60);
+    final hours = duration.inHours;
+    late String value;
+    if (hours > 0) {
+      value = "${hours.toString()} sa önce";
+    } else {
+      value = "${minutes.toString()} dk önce";
+    }
+    setState(() {
+      durationP = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -252,14 +330,14 @@ class OwnerMessage extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  chatItem.avatarUrl,
+                  widget.chatItem.avatarUrl,
                   width: 20,
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 Text(
-                  chatItem.nickname,
+                  widget.chatItem.nickname,
                   style: kTextStyleMd,
                   maxLines: 1,
                 ),
@@ -283,7 +361,7 @@ class OwnerMessage extends StatelessWidget {
                       bottomRight: Radius.circular(15))),
               child: Center(
                 child: Text(
-                  chatItem.description,
+                  widget.chatItem.description,
                   style: kTextStyle,
                   maxLines: 8,
                 ),

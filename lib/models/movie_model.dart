@@ -11,7 +11,7 @@ String movieToMap(Movie data) => json.encode(data.toMap());
 class Movie {
   Movie({
     required this.adult,
-    required this.backdropPath,
+    // required this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalLanguage,
@@ -27,7 +27,7 @@ class Movie {
   });
 
   final bool adult;
-  final String backdropPath;
+  // final String backdropPath;
   final List<dynamic> genreIds;
   final int id;
   final String originalLanguage;
@@ -42,27 +42,27 @@ class Movie {
   final int voteCount;
 
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"],
+        adult: json["adult"] ?? false,
+        // backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
-        originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
-        overview: json["overview"],
-        popularity: json["popularity"],
-        posterPath: json["poster_path"],
-        releaseDate: json["release_date"] != null
+        originalLanguage: json["original_language"] ?? '',
+        originalTitle: json["original_title"] ?? '',
+        overview: json["overview"] ?? '',
+        popularity: json["popularity"] ?? '',
+        posterPath: json["poster_path"] ?? 'null',
+        releaseDate: json["release_date"] != null && json["release_date"] != ""
             ? DateTime.parse(json["release_date"])
             : DateTime.now(),
-        title: json["title"],
-        video: json["video"],
+        title: json["title"] ?? '',
+        video: json["video"] ?? '',
         voteAverage: json['price'] == 0 ? 0.0 : json["vote_average"].toDouble(),
-        voteCount: json["vote_count"],
+        voteCount: json["vote_count"] ?? '',
       );
 
   Map<String, dynamic> toMap() => {
         "adult": adult,
-        "backdrop_path": backdropPath,
+        // "backdrop_path": backdropPath,
         "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
         "original_language": originalLanguage,

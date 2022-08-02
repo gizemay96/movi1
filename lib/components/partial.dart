@@ -39,10 +39,6 @@ class _CustomScaffoldState extends State<CustomScaffold> {
         ? CustomScaffold.kLightThemecolors
         : CustomScaffold.kDarkThemecolors;
 
-    Size size = MediaQuery.of(context).size;
-
-    var currentPage = ModalRoute.of(context)?.settings.name;
-
     return Container(
       constraints: const BoxConstraints.expand(),
       decoration: BoxDecoration(
@@ -95,7 +91,7 @@ class _GlassNumberSelectState extends State<GlassNumberSelect> {
 
     return GlassmorphicContainer(
       height: 50,
-      width: 300,
+      width: MediaQuery.of(context).size.width,
       borderRadius: 20,
       blur: 4,
       alignment: Alignment.center,
@@ -111,7 +107,7 @@ class _GlassNumberSelectState extends State<GlassNumberSelect> {
         textStyle: kTextStyle,
         selectedTextStyle: TextStyle(
           color: selectedItemBgColor,
-          fontSize: 30,
+          fontSize: 25,
           fontWeight: FontWeight.w900,
         ),
         onChanged: (value) => widget.callback(value),

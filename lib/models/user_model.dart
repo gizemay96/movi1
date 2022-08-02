@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserCust {
   final String userId;
   final String nickname;
@@ -17,6 +19,28 @@ class UserCust {
     required this.mtSuggestionRoom,
     required this.score,
   });
+
+  factory UserCust.fromMap(Map<String, dynamic> json) => UserCust(
+        userId: json["userId"],
+        nickname: json["nickname"],
+        avatarUrl: json["avatarUrl"],
+        age: json["age"],
+        email: json["email"],
+        mtSuggestion: json["mtSuggestion"],
+        mtSuggestionRoom: json["mtSuggestionRoom"],
+        score: json["score"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "userId": userId,
+        "nickname": nickname,
+        "avatarUrl": avatarUrl,
+        "age": age,
+        "email": email,
+        "mtSuggestion": mtSuggestion,
+        "mtSuggestionRoom": mtSuggestionRoom,
+        "score": score,
+      };
 }
 
 class UserShortInfo {

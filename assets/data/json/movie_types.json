@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Korku",
+    "icon": "fear"
+  },
+  {
+    "id": 2,
+    "name": "Gerilim",
+    "icon": "fear"
+  },
+  {
+    "id": 3,
+    "name": "Komedi",
+    "icon": "fear"
+  },
+  {
+    "id": 4,
+    "name": "Aksiyon",
+    "icon": "fear"
+  },
+  {
+    "id": 5,
+    "name": "Animasyon",
+    "icon": "fear"
+  },
+  {
+    "id": 6,
+    "name": "Dram",
+    "icon": "fear"
+  },
+  {
+    "id": 7,
+    "name": "Belgesel",
+    "icon": "fear"
+  },
+  {
+    "id": 8,
+    "name": "Western",
+    "icon": "fear"
+  },
+  {
+    "id": 9,
+    "name": "Macera",
+    "icon": "fear"
+  },
+  {
+    "id": 10,
+    "name": "Savaş",
+    "icon": "fear"
+  },
+  {
+    "id": 11,
+    "name": "Spor",
+    "icon": "fear"
+  },
+  {
+    "id": 12,
+    "name": "Uzay",
+    "icon": "fear"
+  }
+]

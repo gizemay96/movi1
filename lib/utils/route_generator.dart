@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
-import 'package:movi/components/partial.dart';
 import 'package:movi/models/advice_model.dart';
-import 'package:movi/models/user_model.dart';
+import 'package:movi/models/suggestionRoom_model.dart';
 import 'package:movi/screens/advice_chat_screen.dart';
 import 'package:movi/screens/create_profile_screen.dart';
 import 'package:movi/screens/create_suggestion.dart';
@@ -13,7 +12,6 @@ import 'package:movi/screens/home_screen.dart';
 import 'package:movi/screens/login_screen.dart';
 import 'package:movi/screens/login_with_phone.dart';
 import 'package:movi/screens/main_app.dart';
-import 'package:movi/screens/profile_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic>? _createRoute(Widget route, RouteSettings settings) {
@@ -51,7 +49,7 @@ class RouteGenerator {
             CreateProfileScreen(userHeaderInfo: userHeaderInfo), settings);
 
       case '/advice-chat':
-        var selectedAdvice = settings.arguments as Advice;
+        var selectedAdvice = settings.arguments as SuggestionRoom;
         return _createRoute(
             AdviceChatScreen(
               selectedAdvice: selectedAdvice,
@@ -59,7 +57,7 @@ class RouteGenerator {
             settings);
 
       case '/create-suggestion':
-        var selectedChatScreenForSuggestion = settings.arguments as Advice;
+        var selectedChatScreenForSuggestion = settings.arguments as SuggestionRoom;
         return _createRoute(
             CreateSuggestionScreen(
               selectedChatScreenForSuggestion: selectedChatScreenForSuggestion,

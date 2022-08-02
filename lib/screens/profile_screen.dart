@@ -48,7 +48,7 @@ class UserInfos extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userNotifierProvider);
-    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+    return Column(children: [
       const Text(
         'Profil',
         style: kTextStyleMd,
@@ -78,7 +78,6 @@ class UserInfos extends ConsumerWidget {
           ],
         ),
       ),
-      const SizedBox(height: 20),
       Text(
         user.nickname,
         style: kTextStyleMd,
@@ -114,20 +113,27 @@ class UserInfos extends ConsumerWidget {
                   )))
         ],
       ),
-      const Spacer(),
-      ProfileInfoCard(
-        title: 'Yorum Sayısı :',
-        value: user.mtSuggestion,
+      const SizedBox(height: 40,),
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ProfileInfoCard(
+              title: 'Yorum Sayısı :',
+              value: user.mtSuggestion,
+            ),
+            ProfileInfoCard(
+              title: 'Entry :',
+              value: user.mtSuggestionRoom,
+            ),
+            ProfileInfoCard(
+              title: 'Puan :',
+              value: user.score,
+            ),
+          ],
+        ),
       ),
-      ProfileInfoCard(
-        title: 'Entry :',
-        value: user.mtSuggestionRoom,
-      ),
-      ProfileInfoCard(
-        title: 'Puan :',
-        value: user.score,
-      ),
-      const Spacer(),
+
     ]);
   }
 }
@@ -145,9 +151,6 @@ class ProfileInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 25,
-        ),
         Stack(
           children: [
             GlassmorphicContainer(
@@ -200,9 +203,6 @@ class ProfileInfoCard extends StatelessWidget {
               ),
             )
           ],
-        ),
-        const SizedBox(
-          height: 25,
         ),
       ],
     );

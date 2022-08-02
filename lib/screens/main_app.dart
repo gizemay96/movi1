@@ -9,7 +9,7 @@ import 'package:movi/screens/home_screen.dart';
 import 'package:movi/screens/profile_screen.dart';
 
 class MainAppScreen extends StatefulWidget {
-  MainAppScreen({Key? key}) : super(key: key);
+  const MainAppScreen({Key? key}) : super(key: key);
 
   static const kLightThemecolors = [
     Color.fromARGB(255, 0, 0, 0),

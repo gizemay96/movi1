@@ -30,4 +30,8 @@ class UserManager extends StateNotifier<UserCust> {
         mtSuggestionRoom: userInfo.mtSuggestionRoom,
         score: userInfo.score);
   }
+
+  getUser(){
+    return state;
+  }
 }
